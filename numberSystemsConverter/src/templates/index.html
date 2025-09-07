@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Systems Converter</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Number Systems Converter</h1>
+        <form action="/" method="POST" class="mt-4">
+            <div class="form-group">
+                <label for="number">Enter a number:</label>
+                <input type="text" class="form-control" id="number" name="number" required
+                       value="{{ number if number is defined else '' }}">
+            </div>
+
+            <div class="form-group">
+                <label for="from_base">Convert from:</label>
+                <select class="form-control" id="from_base" name="from_base" required>
+                    <option value="decimal" {% if from_base == 'decimal' %}selected{% endif %}>Decimal</option>
+                    <option value="binary" {% if from_base == 'binary' %}selected{% endif %}>Binary</option>
+                    <option value="hexadecimal" {% if from_base == 'hexadecimal' %}selected{% endif %}>Hex</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="to_base">Convert to:</label>
+                <select class="form-control" id="to_base" name="to_base" required>
+                    <option value="decimal" {% if to_base == 'decimal' %}selected{% endif %}>Decimal</option>
+                    <option value="binary" {% if to_base == 'binary' %}selected{% endif %}>Binary</option>
+                    <option value="hexadecimal" {% if to_base == 'hexadecimal' %}selected{% endif %}>Hex</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Convert</button>
+        </form>
+
+        <!-- For showing comments/ errors -->
+        {% if comments %}
+            <div class="alert alert-warning mt-4">
+                {{ comments|replace('\n', '<br>')|safe }}
+            </div>
+        {% endif %}
+
+        <!-- For showing conversion result -->
+        {% if result %}
+            <h2 class="mt-5">Conversion Result:</h2>
+            <p>{{ result }}</p>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
